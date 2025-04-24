@@ -94,7 +94,7 @@ pip install --extra-index-url http://localhost:8000/index/ rospy
 ## Generate Message Python Package
 
 ```bash
-git clone https://github.com/rospypi/simple.git
+git clone https://github.com/Woz4tetra/rospy-simple.git
 cd simple
 virtualenv -p python3 venv
 . ./venv/bin/activate

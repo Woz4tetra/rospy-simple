@@ -34,7 +34,7 @@ jobs:
     - name: Download deployed packages
       if: github.ref != env.MASTER_BRANCH
       run: |
-        git clone -b any https://github.com/rospypi/simple.git any
+        git clone -b any https://github.com/Woz4tetra/rospy-simple.git any
         rm any/.git -rf
     - name: Build platform independent packages
       run: |
@@ -48,7 +48,7 @@ jobs:
         git init
         git config user.name "Woz4tetra"
         git config user.email "woz4tetra@gmail.com"
-        git remote add origin https://woz4tetra:${GITHUB_TOKEN}@github.com/rospypi/simple.git
+        git remote add origin https://woz4tetra:${GITHUB_TOKEN}@github.com/Woz4tetra/rospy-simple.git
         git checkout -b any${BRANCH_SUFFIX}
         touch .keep
         git add .
@@ -127,7 +127,7 @@ jobs:
     - name: Download deployed packages
       if: github.ref != env.MASTER_BRANCH
       run: |
-        git clone -b ${BRANCH_NAME} https://github.com/rospypi/simple.git ${BRANCH_NAME} || true
+        git clone -b ${BRANCH_NAME} https://github.com/Woz4tetra/rospy-simple.git ${BRANCH_NAME} || true
         mkdir -p ${BRANCH_NAME}
         rm -rf ${BRANCH_NAME}/.git
       shell: bash
@@ -144,7 +144,7 @@ jobs:
         git init
         git config user.name "Woz4tetra"
         git config user.email "woz4tetra@gmail.com"
-        git remote add origin https://woz4tetra:${GITHUB_TOKEN}@github.com/rospypi/simple.git
+        git remote add origin https://woz4tetra:${GITHUB_TOKEN}@github.com/Woz4tetra/rospy-simple.git
         git checkout -b ${BRANCH_NAME}${BRANCH_SUFFIX}
         touch .keep
         git add .
@@ -169,7 +169,7 @@ jobs:
           pip3 install git+https://github.com/rospypi/index_builder.git@${{ env.INDEX_BUILDER_COMMIT }}
     - name: Build index html
       run: |
-          git clone https://github.com/rospypi/simple.git simple
+          git clone https://github.com/Woz4tetra/rospy-simple.git simple
           mkdir index
           python3 -m index_builder repo --path simple index
           python3 -m index_builder repo --prefix pre --path simple index/_pre
@@ -182,7 +182,7 @@ jobs:
         git init
         git config user.name "Woz4tetra"
         git config user.email "woz4tetra@gmail.com"
-        git remote add origin https://woz4tetra:${GITHUB_TOKEN}@github.com/rospypi/simple.git
+        git remote add origin https://woz4tetra:${GITHUB_TOKEN}@github.com/Woz4tetra/rospy-simple.git
         git checkout -b gh-pages
         touch .nojekyll
         git add .
