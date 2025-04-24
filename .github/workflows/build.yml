@@ -10,19 +10,19 @@ env:
   INDEX_BUILDER_COMMIT: 4fc61ecb09514fe285f43c7316c5c7f52c3ade6b
 jobs:
   universal-build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         submodules: recursive
     - name: Set up Python
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v5
       with:
-        python-version: 3.6
+        python-version: 3.11.12
     - name: Install rospy-build
       run: |
-        python -m pip install --upgrade pip
-        pip install -U setuptools==51.2.0 wheel
+        python -m pip install --upgrade pip==24.2
+        pip install -U setuptools==75.2.0 wheel
         ./rospy-builder/install.sh
         pip install rospy-builder/
     - name: Export branch suffix and make an empty directory
@@ -46,9 +46,9 @@ jobs:
       run: |
         cd any
         git init
-        git config user.name "Tamaki Nishino"
-        git config user.email "otamachan@gmail.com"
-        git remote add origin https://otamachan:${GITHUB_TOKEN}@github.com/rospypi/simple.git
+        git config user.name "Woz4tetra"
+        git config user.email "woz4tetra@gmail.com"
+        git remote add origin https://woz4tetra:${GITHUB_TOKEN}@github.com/rospypi/simple.git
         git checkout -b any${BRANCH_SUFFIX}
         touch .keep
         git add .
@@ -60,28 +60,18 @@ jobs:
     runs-on: ${{ matrix.platform }}
     strategy:
       matrix:
-        platform: [ubuntu-20.04, macos-latest, windows-latest]
-        python-version: [3.6, 3.7, 3.8]
-        exclude:
-          - platform: macos-latest
-            python-version: 3.6
-          - platform: windows-latest
-            python-version: 3.6
-        include:
-          - platform: macos-10.15
-            python-version: 3.6
-          - platform: windows-2019
-            python-version: 3.6
+        platform: [ubuntu-22.04, macos-latest, windows-latest]
+        python-version: [3.10, 3.11]
 
     steps:
     - name: Git config
       run: git config --global core.symlinks true
       if: startsWith(matrix.platform, 'windows-')
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         submodules: recursive
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install packages(Ubuntu)
@@ -125,7 +115,7 @@ jobs:
     - name: Install rospy-build
       run: |
         python -m pip install --upgrade pip
-        pip install -U setuptools==51.2.0 wheel
+        pip install -U setuptools==75.2.0 wheel
         bash ./rospy-builder/install.sh
         pip install rospy-builder/
     - name: Export branch suffix and make an empty directory
@@ -152,9 +142,9 @@ jobs:
       run: |
         cd ${BRANCH_NAME}
         git init
-        git config user.name "Tamaki Nishino"
-        git config user.email "otamachan@gmail.com"
-        git remote add origin https://otamachan:${GITHUB_TOKEN}@github.com/rospypi/simple.git
+        git config user.name "Woz4tetra"
+        git config user.email "woz4tetra@gmail.com"
+        git remote add origin https://woz4tetra:${GITHUB_TOKEN}@github.com/rospypi/simple.git
         git checkout -b ${BRANCH_NAME}${BRANCH_SUFFIX}
         touch .keep
         git add .
@@ -164,15 +154,15 @@ jobs:
 
   update-pages:
     needs: native-build
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         submodules: recursive
     - name: Set up Python
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v5
       with:
-        python-version: 3.8
+        python-version: 3.11.12
     - name: Prepare build env
       run: |
           python3 -m pip install --upgrade pip
@@ -190,9 +180,9 @@ jobs:
       run: |
         cd index
         git init
-        git config user.name "Tamaki Nishino"
-        git config user.email "otamachan@gmail.com"
-        git remote add origin https://otamachan:${GITHUB_TOKEN}@github.com/rospypi/simple.git
+        git config user.name "Woz4tetra"
+        git config user.email "woz4tetra@gmail.com"
+        git remote add origin https://woz4tetra:${GITHUB_TOKEN}@github.com/rospypi/simple.git
         git checkout -b gh-pages
         touch .nojekyll
         git add .
